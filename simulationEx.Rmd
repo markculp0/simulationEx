@@ -22,6 +22,9 @@ lambda <- 0.2
 # Generate random deviates for distribution
 rexp(n, lambda)
 
+
+# An exploratory plot 
+
 ```
 
 ## Simulations:  
@@ -30,21 +33,37 @@ rexp(n, lambda)
 ```
 
 ## Sample Mean versus Theoretical Mean
-
+This distribution is centered at ...  The theoretical center, or mean of the distribution is centered at ...
 
 ```{r}
 ```
 
 ## Sample Variance versus Theoretical Variance
+This distribution's variance is ... The theoretical  variance of this distribution would be ...
+
 
 
 ```{r}
 ```
 
 ## Distribution
+We know this distribuion is normal because ...
 
+
+
+Our conclusions and assumptions ... 
 
 ```{r}
+
+hist(runif(1000))
+
+#---
+
+mns = NULL
+for (i in 1:1000) mns = c(mns, mean(runif(40)))
+hist(mns)
+
+
 ```
 
 
