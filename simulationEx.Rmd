@@ -1,0 +1,51 @@
+---
+title: "Simulation Exercise"
+author: "Mark Culp"
+date: "March 25, 2017"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Overview:
+This paper explores simulations on an Exponential Distribution.  
+
+```{r}
+
+# Set parameters for distribution
+n <- 40 
+lambda <- 0.2
+
+
+# Generate random deviates for distribution
+rexp(n, lambda)
+
+```
+
+## Simulations:  
+
+```{r}
+```
+
+## Sample Mean versus Theoretical Mean
+
+
+```{r}
+```
+
+## Sample Variance versus Theoretical Variance
+
+
+```{r}
+```
+
+## Distribution
+
+
+```{r}
+```
+
+
+
