@@ -18,9 +18,10 @@ This paper explores simulations on an Exponential Distribution.
 n <- 40 
 lambda <- 0.2
 
+set.seed(0)
 
-# Generate random deviates for distribution
-rexp(n, lambda)
+# Generate random deviates for a sample exponential distribution
+sampleDist <- rexp(n, lambda)
 
 
 # An exploratory plot 
@@ -36,14 +37,27 @@ rexp(n, lambda)
 This distribution is centered at ...  The theoretical center, or mean of the distribution is centered at ...
 
 ```{r}
+
+# Calculate mean of the sample distribution
+sampleDistMean <- mean(sampleDist)
+
+# Calculate hypothetical mean for the exponential distribution
+hypoDistMean <- 1/lambda
+
 ```
 
 ## Sample Variance versus Theoretical Variance
 This distribution's variance is ... The theoretical  variance of this distribution would be ...
 
-
-
 ```{r}
+
+# Calculate variance of the sample distribution
+sampleDistVariance <- var(sampleDist)
+
+# Calculate hypothetical variance for the exponential distribution
+hypoDistVariance <- (1/lambda)^2
+
+
 ```
 
 ## Distribution
