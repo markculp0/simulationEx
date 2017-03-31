@@ -8,14 +8,42 @@
 ## Overview:
 ## --------
 
+# This paper explores simulations on an Exponential Distribution, 
+# a distribution that describes the time between events in a 
+# Poisson process.  We use R's rexp(n, lambda) function to create 
+# samples from an Eponential Distribution, and compare it with 
+# the Central Limit Theorem (CLT).  The CLT is one of the most  
+# important theorems in statistics which states that the 
+# distribution or sum of a large number of independent random 
+# variables tends toward a normal distribution regardless of the 
+# underlying distribution.  
+
+# First, let's create a small exponential distribution sample, and
+# examine its properties:
+
+# code start---------------------------
+
 # Set parameters for distribution
 n <- 40
 lambda <- 0.2
 
+# Create small sample
+ssample <- rexp(n, lambda)
+
+# Range of numbers in sample
+range(ssample)
+
 
 
 # An exploratory plot 
-# . . .
+
+plot(ssample)
+# abline(0,..)
+
+
+
+
+# code end ---------------------------
 
 ## -----------
 ## Simulations:  
