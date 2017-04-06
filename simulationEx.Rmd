@@ -15,7 +15,7 @@ a distribution that describes the time between events in a
 Poisson process.  We use R's "rexp(n, lambda)"" function to create samples from an exponential distribution, and compare it with 
 the Central Limit Theorem (CLT).  The CLT is one of the most  
 important theorems in statistics which states that the 
-distribution or sum of a large number of independent random 
+distribution or sum of a large number of independent, random 
 variables tends toward a normal distribution regardless of the 
 underlying distribution.   
 
@@ -44,7 +44,7 @@ hist(expDist)
 
 
 ```
-This histogram shows how the density of the exponential distribution changes according to its rate parameter.  It is downward sloping, at a decreasing rate.  It appears nothing like a normal, bell-shaped distribution.
+This histogram shows how the density of the exponential distribution changes according to its rate parameter.  It is downward sloping, at a decreasing rate.  It does not look anything like a normal, bell-shaped distribution.
 
 ## Simulations:  
 
@@ -75,7 +75,7 @@ hist(mnsExpDist)
 
 ```
 
-Now this distribution appears to be much more normal and bell-shaped.  This is the Central Limits Theorem at work. Lets compare the means and variances of the two distributions with the theoretical mean and variance of an exponential distribution.  
+This distribution appears to be more normal and bell-shaped.  This is the Central Limits Theorem at work. Lets now compare the means and variances of the two distributions with the theoretical mean and variance of an exponential distribution.  
 
 ## Sample Mean versus Theoretical Mean
 
@@ -107,9 +107,12 @@ This distribution of averages is centered at 4.99 while the theoretical center, 
 The distribution of 1,000 means is drawn from a sampling of 40,000 exponential distribution deviates.  It approximates the mean better than the sample of 1,000 random deviates drawn directly from the exponential distribution.
 
 ## Sample Variance versus Theoretical Variance
-This distribution's variance is ... The theoretical  variance of this distribution would be ...
 
-```{r, warning=FALSE}
+
+```{r}
+
+# Load libraries
+library(knitr)
 
 # Calculate variance of the exponential distribution
 expDistVariance <- round(var(expDist),3)
@@ -128,13 +131,14 @@ kable(rowVar, caption = "Comparison of Sample and Hypothetical Variances", col.n
 
 ```
 
-## Distribution
+This variance for the distribution of average's is approximately 25.285 while the theoretical variance of the distribution is 25.  Once again, the distribution of averages more closely approximates the theoretical variance than does the sample of 1,000 random deviates.
 
-Our conclusions and assumptions ... 
+
+## Distribution
 
 We assumed we were dealing with a properly normalized distribution of independent and identically distributed (IID) random variables.  A collection of random variables is independent if they are statistically unrelated from one and another.  They are identically distributed if they were drawn from the same population distribution.  Use of the rexp() function ensures these properties.  
 
-Our initial histogram of the exponential distribution of averages appeared normal.  We now conduct some tests to assess that fact.
+Our initial histogram of the distribution of averages appeared normal.  We now conduct some additional tests to assess this fact.
 
 
 ```{r}
@@ -147,8 +151,7 @@ sdMns <- sd(mnsExpDist)
 # exponential averages
 mns90quan <- qnorm(0.90, mean = mnsDistMean, sd = sdMns)
 
-# Calculate actual number of random deviates
-# from the distribution of exponential averages
+# Actual number of random deviates
 # below the 90th quantile
 sum(mnsExpDist < mns90quan)
 
@@ -157,15 +160,25 @@ sum(mnsExpDist < mns90quan)
 mns75quan <- qnorm(0.75, mean = mnsDistMean, sd = sdMns)
 
 # Calculate actual number of random deviates
-# from the distribution of exponential averages
 # below the 75th quantile
 sum(mnsExpDist < mns75quan)
 
 
+```
+
+So we've calculated the 75th and 90th quantile for a normal distribution with the same mean and standard deviation as our distribution of averages. Then we find the number of sample means contained in our distribution below these two numbers.  Since our distribution has exactly 1,000 means, we would expect the numbers to come out at about 750 and 900.  The actual numbers are 761 and 892.  Not very far from our expectation.
+
+```{r}
+
+# 95% confidence interval
+mnsDistMean + c(-1,1) * qnorm(0.975) * sdMns
+
+# Mean values within the confidence interval
+sum(mnsExpDist > 3.449017 & mnsExpDist < 6.530983)
 
 ```
 
-
+Lastly, the 95% confidence interval for the distribution of averages is calculated above, and the number of mean values that fall within that interval is also listed.
 
 We know this distribution is normal because ...
 

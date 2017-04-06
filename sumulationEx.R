@@ -175,3 +175,19 @@ sum(mnsExpDist < mns75quan)
 
 
 # We know this distribution is normal because ...
+
+t.test(mnsExpDist)
+# 95 percent confidence interval:
+# 4.940888 5.038467
+
+# Now we calculate a 95% confidence interval
+# for the distribution of averages
+5 + c(-1,1) * qnorm(0.975) * sdMns/sqrt(1000)
+# [1] 4.95127 5.04873
+
+mean(mnsExpDist)
+sum(mnsExpDist > 3.449017 & mnsExpDist < 6.530983)
+
+mnsDistMean + c(-1,1) * qnorm(0.975) * sdMns
+# [1] 3.449017 6.530983
+
