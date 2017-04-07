@@ -36,11 +36,7 @@ expDist <- rexp(n, lambda)
 range(expDist)
 
 # Create a histogram of the distribution of exponentials
-hist(expDist)
-# plot(sampleExpDist)
-# abline(0,..)
-
-
+hist(expDist, main = "Histogram of Exponential Distribution")
 
 # code end ---------------------------
 
@@ -80,7 +76,7 @@ for (i in 1 : 1000) {
 }
 
 # Create histogram of the distribution of exponential averages
-hist(mnsExpDist)
+hist(mnsExpDist, main = "Histogram of Exponential Averages")
 
 # Now this distribution appears to be much more normal 
 # and bell-shaped.  This is the Central Limits Theorem 
@@ -191,3 +187,16 @@ sum(mnsExpDist > 3.449017 & mnsExpDist < 6.530983)
 mnsDistMean + c(-1,1) * qnorm(0.975) * sdMns
 # [1] 3.449017 6.530983
 
+# Plot of Rounded Means
+# ---------------------
+# Round means to one decimal place
+rndMeans <- round(mnsExpDist,1)
+
+# Sorted unique mean values
+x <- sort(unique(rndMeans))
+
+# Create dataframe
+df <- as.data.frame(table(rndMeans))
+
+# Plot the densities of the means
+plot(xval, df$Freq, col="blue", xlab="Exponential Means", ylab="Density", type="l",lwd=2, cex=2, main="Density Chart for Rounded Mean Avgs", cex.axis=.8)

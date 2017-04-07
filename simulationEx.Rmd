@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Overview:
 This paper explores simulations on an exponential distribution, 
 a distribution that describes the time between events in a 
-Poisson process.  We use R's "rexp(n, lambda)"" function to create samples from an exponential distribution, and compare it with 
+Poisson process.  We use R's "rexp(n, lambda)" function to create samples from an exponential distribution, and compare it with 
 the Central Limit Theorem (CLT).  The CLT is one of the most  
 important theorems in statistics which states that the 
 distribution or sum of a large number of independent, random 
@@ -38,10 +38,7 @@ expDist <- rexp(n, lambda)
 range(expDist)
 
 # Create a histogram of the distribution of exponentials
-hist(expDist)
-# plot(sampleExpDist)
-# abline(0,..)
-
+hist(expDist, main = "Histogram of Exponential Distribution")
 
 ```
 This histogram shows how the density of the exponential distribution changes according to its rate parameter.  It is downward sloping, at a decreasing rate.  It does not look anything like a normal, bell-shaped distribution.
@@ -71,7 +68,7 @@ for (i in 1 : 1000) {
 }
 
 # Create histogram of the distribution of exponential averages
-hist(mnsExpDist)
+hist(mnsExpDist, main = "Histogram of Exponential Averages")
 
 ```
 
@@ -166,7 +163,7 @@ sum(mnsExpDist < mns75quan)
 
 ```
 
-So we've calculated the 75th and 90th quantile for a normal distribution with the same mean and standard deviation as our distribution of averages. Then we find the number of sample means contained in our distribution below these two numbers.  Since our distribution has exactly 1,000 means, we would expect the numbers to come out at about 750 and 900.  The actual numbers are 761 and 892.  Not very far from our expectation.
+So we've calculated the 75th and 90th quantile for a normal distribution with the same mean and standard deviation as our distribution of averages. Then we find the number of sample means contained in our distribution below these two numbers.  Since our distribution has exactly 1,000 means, we would expect the numbers to come out at about 750 and 900.  The actual numbers are 761 and 892.  Not far from our expectation.  Now lets examine a 95% confidence interval.
 
 ```{r}
 
@@ -178,7 +175,23 @@ sum(mnsExpDist > 3.449017 & mnsExpDist < 6.530983)
 
 ```
 
-Lastly, the 95% confidence interval for the distribution of averages is calculated above, and the number of mean values that fall within that interval is also listed.
+The 95% confidence interval for the distribution of averages is calculated above, along with the number of means that fall within that interval.  This also meets our expectations, 950 values.  A normal density chart.
 
-We know this distribution is normal because ...
 
+```{r}
+
+# Round means to one decimal place
+rndMeans <- round(mnsExpDist,1)
+
+# Sorted unique mean values
+x <- sort(unique(rndMeans))
+
+# Create dataframe
+df <- as.data.frame(table(rndMeans))
+
+# Plot the densities of the means
+plot(x, df$Freq, col="blue", xlab="Rounded Exponential Means", ylab="Density", type="l",lwd=2, cex=2, main="Density Chart for Rounded Mean Avgs", cex.axis=.8)
+
+```
+
+We know this distribution is normal because it conforms to the characteristics we would expect to see in a normal distribution.  We verified this at the 75th and the 90th quantiles, and at the 95% confidence interval.  The density chart is not quite normal but it appears to be moving in that direction, as the Central Limits Theorem predicted.   
